@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang = "en" dir = "ltr">
+	<head>
+		<meta charset = "utf-8">
+    	<title>Heart Failure Prediction Using  Neural Network</title>
+    	<link rel = "stylesheet" href = "{{ url_for('static',filename='style1.css') }}">
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    	<script>
+    		function togglePopup(){
+  			document.getElementById("popup-1").classList.toggle("active");
+			}
+		</script>
+	</head>
+	<body>
+		<div class = "box-area">
+			<header>
+				<div class = "navwrapper">
+					<div class = "logo">
+						<a href = "#"><b>WE CARE!</b></a>
+					</div>
+					<nav>
+						<a href = "#">Home</a>
+						<a href = "#">Model</a>
+						<a href = "#">Source Code</a>
+						<a href = "about.html">About</a>
+					</nav>
+				</div>
+			</header>
+			<div class = "banner-area">
+				<h2>HEART RISK PREDICTION</h2>
+			</div>
+			<div class = "container">
+			<form id = "form" action = "{{ url_for('main') }}" method = "POST">
+				<div class = "form-group">
+					<label id = "age">Age</label>
+					<input type = "float" name = "age" id = "age" class = "form-control" placeholder = "Enter your Age" required>
+				</div>
+				<div class = "form-group">
+					<label id = "sex">Sex</label>
+					<input type = "float" name = "sex" id = "sex" class = "form-control" placeholder = "Enter your Sex in 1(Male)/ 0(Female)" required>
+				</div>
+				<div class = "form-group">
+					<p><b>Has a family member suffered or suffers from obesity?</b></p>
+					<select id = "dropdown" name = "in_fhwo" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 1>Yes</option>
+						<option value = 0>No</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>Do you eat high caloric food frequently?</b></p>
+					<select id = "dropdown" name = "in_favc" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 1>Yes</option>
+						<option value = 0>No</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>Do you usually eat vegetables in your meals?</b></p>
+					<select id = "dropdown" name = "in_fcvc" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 1>Never</option>
+						<option value = 2>Sometimes</option>
+						<option value = 3>Always</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>How many main meals do you have daily?</b></p>
+					<select id = "dropdown" name = "in_ncp" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 1>Between 1 and 2</option>
+						<option value = 2>Three</option>
+						<option value = 3>More than three</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>Do you eat any food between meals?</b></p>
+					<select id = "dropdown" name = "in_caec" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 2>Never</option>
+						<option value = 3>Sometimes</option>
+						<option value = 1>Frequently</option>
+						<option value = 0>Always</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>How much water do you drink daily?</b></p>
+					<select id = "dropdown" name = "in_cowd" class = "form-control" required>
+						<option disabled selected value>Select an option:</option>
+						<option value = 1>Less than a liter</option>
+						<option value = 2>Between 1 and 2 liters</option>
+						<option value = 3>More than 2 liters</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>Do you monitor the calories you eat daily?</b></p>
+					<select id = "dropdown" name = "in_scc" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 1>Yes</option>
+						<option value = 0>No</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>How often do you have physical activity?</b></p>
+					<select id = "dropdown" name = "in_faf" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 0>Never</option>
+						<option value = 1>1 or 2 days</option>
+						<option value = 2>2 or 4 days</option>
+						<option value = 3>4 or 5 days</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>How long do you use technological devices such as cell phone, videogames, television, computer, etc.?</b></p>
+					<select id = "dropdown" name = "in_tue" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 0>0 to 2 hours</option>
+						<option value = 1>3 to 5 hours</option>
+						<option value = 2>More than 5 hours</option>
+					</select>
+				</div>
+				<div class = "form-group">
+					<p><b>How often do you drink alcohol?</b></p>
+					<select id = "dropdown" name = "in_calc" class = "form-control" required>
+						<option disabled selected value>Select an option</option>
+						<option value = 2>Never</option>
+						<option value = 3>Sometimes</option>
+						<option value = 1>Frequently</option>
+						<option value = 0>Always</option>
+					</select>
+				</div>
+				<div>
+				<button type="submit" class="btn btn-primary btn-lg btn-block">Predict</button>
+				</di>
+                </form>
+                <br>
+                <div class="result" align="center">
+                   {{result}}
+                </div>
+		</div>
+	</body>
+</html>
